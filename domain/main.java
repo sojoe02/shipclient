@@ -9,6 +9,11 @@ package domain;
  *
  * @author japper
  */
-public class main {
+public class main  {
+
+    public static void main(String args[]){
+	long i = (long) Math.pow(16, 11);
+	System.out.println(i);
+    }
 
 }
