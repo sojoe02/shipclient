@@ -6,9 +6,12 @@ package domain;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Scanner;
 
 /**
  *
@@ -16,26 +19,22 @@ import java.io.Reader;
  */
 public class getGps {
 
+    Scanner s = null;
+
     public String readGps() {
-	StringBuffer buffer = new StringBuffer();
+
+	String gppsa = null;
+
 	try {
-	    FileInputStream fis = new FileInputStream("gps/gps.txt");
-	    InputStreamReader isr = new InputStreamReader(fis, "UTF8");
+	    s = new Scanner(new BufferedReader(new FileReader("src/gps")));
 
-	    Reader in = new BufferedReader(isr);
-
-	    int ch;
-
-	    while ((ch = in.read()) > -1) {
-		buffer.append((char) ch);
+	    while (s.hasNext()) {
+		gppsa += s;
 	    }
-	    in.close();
-	    return buffer.toString();
 
-	} catch (IOException e) {
-	    e.printStackTrace();
-	    return null;
+	} catch (FileNotFoundException ex) {
+	    System.out.println("src/gps not found");
 	}
-
+	return gppsa;
     }
 }
